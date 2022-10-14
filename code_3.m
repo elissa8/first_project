@@ -9,7 +9,6 @@ Deff= 10^(-10);
 N=4;
 dr=R/N;
 
-for i =1:N+1;
-    U= (1/4)*(s/Deff)*((dr*(i-1))^2-R^2)+Ce
+for j =1:N+1;
+    X= (1/4)*(s/Deff)*((dr*(j-1))^2-R^2)+Ce
 end
-
