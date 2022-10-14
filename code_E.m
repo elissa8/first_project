@@ -14,14 +14,12 @@ dr=R/N;
 d1= (Deff)/(dr^2);
 d2= Deff/dr;
 
-K=sparse(N+1,N+1);
+K=zeros(N+1,N+1);
 F=zeros(N+1,1);
 
 C0=0;
-
-K(1,1)=-3;
-K(1,2)=4;
-K(1,3)=-1;
+K(1,1)=-1;
+K(1,2)=1;
 K(N+1,N+1)=1;
 F(1,1)=0;
 F(N+1,1)=Ce;
@@ -30,14 +28,14 @@ for i = 2:N;
         F(i,1) = s;
 end
 
-U=K\F;
+U=K\F
 
 x=0:dr:R;
 hold on
 plot(x,U,'DisplayName','numerical solution')
 
 
-X= (1/4).*(s./Deff).*(x.^2-R^2)+Ce
+X= (1/4).*(s./Deff).*(x.^2-R^2)+Ce;
 plot(x,X,'DisplayName','analytical solution')
 
 title('Combine Plots')
