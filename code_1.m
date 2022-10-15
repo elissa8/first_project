@@ -10,8 +10,8 @@ N=4;
 dr=R/N;
 
 
-t=1;
-nt=10;
+t=100000000000;
+nt=4;
 dt= t/nt;
 
 d1= (dt*Deff)/(dr^2);
@@ -34,9 +34,8 @@ for i = 2:N;
 
     K(i,i-1:i+1) = [-d1 2*d1+d2/(dr*(i-1))+1 -d1-d2/(dr*(i-1))];
     F(i,1) = -s;
-    X=K\F
+    X=K\F;
 end
-
 for j = 1:nt;
     for i = 2:N;
         K(i,i-1:i+1) = [-d1 2*d1+d2/(dr*(i-1))+1 -d1-d2/(dr*(i-1))];

@@ -8,6 +8,7 @@ Deff= 10^(-10);
 
 N=[4 40 100 400 4000 40000];
 
+
 for e =1:6
     dr=R/N(e);
 
@@ -45,7 +46,7 @@ for e =1:6
     X= (1/4).*(s./Deff).*(x.^2-R^2)+Ce;
     plot(x,X,'DisplayName','analytical solution')
     
-    title('Combine Plots')
+    title('Combine Plots N=',N(e))
     xlabel('r-values')
     ylabel('y-values')
     
@@ -72,11 +73,14 @@ for e =1:6
 end
 dr=R./N
 figure(7)
+p1=log(Lf_1)./log(dr)
+p2=log(Lf_2)./log(dr)
+p3=log(Lf_3)./log(dr)
 hold on
 
-plot(log(Lf_1),log(dr),'DisplayName','L1')
-plot(log(Lf_2),log(dr),'DisplayName','L2')
-plot(log(Lf_3),log(dr),'DisplayName','L3')
+loglog(dr,Lf_1,'DisplayName','L1')
+loglog(dr,Lf_2,'DisplayName','L2')
+loglog(dr,Lf_3,'DisplayName','L3')
 title('log L vs log dr')
 xlabel('log dr')
 ylabel('log L')

@@ -68,12 +68,17 @@ for e =1:6
 end
 
 dr=R./N
+[]
 figure(7)
 hold on
+loglog(dr,Lf_1,'DisplayName','L1')
+loglog(dr,Lf_2,'DisplayName','L2')
+loglog(dr,Lf_3,'DisplayName','L3')
 
-plot(log(Lf_1),log(dr),'DisplayName','L1')
-plot(log(Lf_2),log(dr),'DisplayName','L2')
-plot(log(Lf_3),log(dr),'DisplayName','L3')
+
+% plot(log(Lf_1),log(dr),'DisplayName','L1')
+% plot(log(Lf_2),log(dr),'DisplayName','L2')
+% plot(log(Lf_3),log(dr),'DisplayName','L3')
 title('log L vs log dr')
 xlabel('log dr')
 ylabel('log L')
