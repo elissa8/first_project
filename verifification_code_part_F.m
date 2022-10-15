@@ -1,13 +1,15 @@
 clc;
 clear all;
+%  Initial values
 Ce=10;
 R=0.5;
 k=4*10^(-9);
 s= 10^(-8);
 Deff= 10^(-10);
 
-
+%  Taking 6 meshes
 N=[4 40 100 400 4000 40000];
+%  looping for different meshes
 
 for e =1:6
     dr=R/N(e);
@@ -21,31 +23,38 @@ for e =1:6
     F=zeros(N(e)+1,1);
     
     C0=0;
+    %  neumann boundary condition CENTRAL approximation
     
     K(1,1)=-1;
     K(1,2)=1;
+%     K(1,1)=-3;
+%     K(1,2)=4;
+%     K(1,3)=-1;
     K(N(e)+1,N(e)+1)=1;
+    
     F(1,1)=0;
+    %     Dirichlet condition
     F(N(e)+1,1)=Ce;
+    % equation for i from 2 to N
     for i = 2:N(e);
             K(i,i-1:i+1) = [d1-d2/(dr*(i-1)) -2*d1 d1+d2/(dr*(i-1))];
             F(i,1) = s;
     end
-    
+    %     Solving for concentration
     U=K\F;
     
     x=0:dr:R;
     figure(e)
     hold on
-    plot(x,U,'DisplayName','numerical solution')
+    plot(x,U,'DisplayName','numerical solution', 'LineWidth',3)
     
     
     X= (1/4).*(s./Deff).*(x.^2-R^2)+Ce;
-    plot(x,X,'DisplayName','analytical solution')
+    plot(x,X,'DisplayName','analytical solution', 'LineWidth',3)
     
-    title('Combine Plots')
+    title('Combine Plots N=', N(e))
     xlabel('r-values')
-    ylabel('y-values')
+    ylabel('Concentration C')
     
     hold off
     % initial value of norme 1 and 2 

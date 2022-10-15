@@ -1,14 +1,15 @@
 clc;
 clear all;
+%  Initial values
 Ce=10;
 R=0.5;
 k=4*10^(-9);
 s= 10^(-8);
 Deff= 10^(-10);
-
+%  Taking 6 meshes
 N=[4 40 100 400 4000 40000];
 
-
+%  looping for different meshes
 for e =1:6
     dr=R/N(e);
 
@@ -28,27 +29,28 @@ for e =1:6
     K(N(e)+1,N(e)+1)=1;
     
     F(1,1)=0;
+%     Dirichlet condition
     F(N(e)+1,1)=Ce;
-
+% equation for i from 2 to N
     for i = 2:N(e);
             K(i,i-1:i+1) = [d1 -2*d1-d2/(dr*(i-1)) d1+d2/(dr*(i-1))];
             F(i,1) = s;
     end
-    
+%     Solving for concentration
     U=K\F;
-    
+%     ploting the numerical and analytical graphs
     x=0:dr:R;
     figure(e)
     hold on
-    plot(x,U,'DisplayName','numerical solution')
+    plot(x,U,'DisplayName','numerical solution', 'LineWidth',3)
     
     
     X= (1/4).*(s./Deff).*(x.^2-R^2)+Ce;
-    plot(x,X,'DisplayName','analytical solution')
+    plot(x,X,'DisplayName','analytical solution', 'LineWidth',3)
     
     title('Combine Plots N=',N(e))
     xlabel('r-values')
-    ylabel('y-values')
+    ylabel('Concentration C')
     
     hold off
     % initial value of norme 1 and 2 
@@ -73,11 +75,9 @@ for e =1:6
 end
 dr=R./N
 figure(7)
-p1=log(Lf_1)./log(dr)
-p2=log(Lf_2)./log(dr)
-p3=log(Lf_3)./log(dr)
-hold on
 
+hold on
+% logarithmic plots using MATLAB of L vs h
 loglog(dr,Lf_1,'DisplayName','L1')
 loglog(dr,Lf_2,'DisplayName','L2')
 loglog(dr,Lf_3,'DisplayName','L3')
