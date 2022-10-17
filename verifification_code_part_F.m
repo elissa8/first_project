@@ -25,11 +25,11 @@ for e =1:6
     C0=0;
     %  neumann boundary condition CENTRAL approximation
     
-    K(1,1)=-1;
-    K(1,2)=1;
-%     K(1,1)=-3;
-%     K(1,2)=4;
-%     K(1,3)=-1;
+%     K(1,1)=-1;
+%     K(1,2)=1;
+    K(1,1)=-3;
+    K(1,2)=4;
+    K(1,3)=-1;
     K(N(e)+1,N(e)+1)=1;
     
     F(1,1)=0;
